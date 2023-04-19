@@ -1,0 +1,1 @@
+﻿Create a presentation layer that provides a user interface for the application. This layer should interact with the business layer to retrieve and display data to the user. You can use a variety of technologies to create the presentation layer, such as Windows Forms, ASP.NET, or WPF.
