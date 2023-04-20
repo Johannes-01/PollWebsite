@@ -1,0 +1,16 @@
+#button {
+	background: white;
+    cursor: pointer;
+	width: 100%;
+	min-height: 25px;
+	border-radius: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#button p {
+    user-select: none;
+    margin: 0;
+    font-weight: 600;
+}
