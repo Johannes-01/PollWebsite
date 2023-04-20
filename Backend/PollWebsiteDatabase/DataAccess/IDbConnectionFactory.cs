@@ -10,6 +10,10 @@ namespace PollWebsiteDatabase.DataAccess
 {
     public interface IDbConnectionFactory
     {
-        MySqlConnection CreateConnection(String server, String database, String user, String password);
+        public String Server { get; set; }
+        public String Database { get; set; }
+        public String User { get; set; }
+        public String Password { get; set; }
+        public MySqlConnection CreateConnection();
     }
 }
