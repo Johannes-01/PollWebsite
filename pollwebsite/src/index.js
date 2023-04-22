@@ -6,6 +6,7 @@ import Login from './routes/Login';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Root from './routes/root';
+import Take from './routes/Take';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -13,6 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Routes>
         <Route path="/" element={<Root />}>
           <Route index element={<Login />} />
+          <Route path='/takepoll' element={<Take />} />
           <Route path='/penis' element={<App />} />
         </Route>
       </Routes>

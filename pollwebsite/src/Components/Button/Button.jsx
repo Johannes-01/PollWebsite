@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import React from "react";
 import "./Button.css"
 
-export default function Button({text}) {
+export default function Button({text, onclick}) {
     const validateLogin = useNavigate();
 
     const handleClick = () => {
@@ -10,7 +10,7 @@ export default function Button({text}) {
     };
 
     return (
-        <div id="button" onClick={handleClick}>
+        <div id="button" onClick={onclick}>
             <p>{text}</p>
         </div>
     );
