@@ -10,20 +10,43 @@ namespace PollWebsiteDatabase.DataAccess
 {
     public class ConnectionFactory : IDbConnectionFactory
     {
-        private readonly string _connectionString;
+        private string server;
+        public string Server
+        {
+            get { return server; }
+            set { server = value; }
+        }
+
+        private string database;
+        public string Database { 
+            get { return database; }
+            set { database = value; }
+        }
+
+        private string user;
+        public string User
+        {
+            get { return user; }
+            set { user = value; }
+        }
+
+        private string password;
+        public string Password { 
+            get { return password; }
+            set { password = value; }
+        }
 
         public ConnectionFactory(String server, String databse, String user, String password)
         {
-            
+            this.server = server;
+            this.database = databse;
+            this.user = user;
+            this.password = password;
         }
 
-        public MySqlConnection CreateConnection(String server, String database, String user, String password)
+        public MySqlConnection CreateConnection()
         {
-            /*server = localhost
-             database = pollwebsite
-            user = root
-            password = root*/
-            String conString = "server=" + server + ";database=" + database + ";user=" + user + ";password=" + password;
+            String conString = "server=" + this.server + ";database=" + this.database + ";user=" + this.user + ";password=" + this.password+";";
             MySqlConnection conFactory = new MySqlConnection(conString);
             
             try
