@@ -6,6 +6,7 @@ import Option from "./Option";
 export default function Radio({options}) {
     let current_selected = null;
     const select = (test) => {
+        if (test === null) return;
         let element = test.target;
         if (current_selected !== null) {
             current_selected.target.classList.remove("option-chosen");
