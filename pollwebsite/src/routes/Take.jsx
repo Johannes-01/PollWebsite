@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Radio, Text, TextField } from "../Components/components";
+import { Button, Radio, Text, Slider } from "../Components/components";
 import "../style/take.css"
 
 export default function Take() {
@@ -12,6 +12,10 @@ export default function Take() {
                 <div id="poll-inner">
                     <Text></Text>
                     <Radio options={["option 1", "option 2", "option 3"]}></Radio>
+                    <Slider></Slider>
+                </div>
+                <div id="ending">
+                    <Button text={"finish"}></Button>
                 </div>
             </div>
         </div>
