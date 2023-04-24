@@ -13,4 +13,4 @@ Features:
 ![image](https://user-images.githubusercontent.com/64578396/233946017-ff35f6e2-94df-43f5-9718-41515a0149dd.png)
 
 # answer the given questions
-![image](https://user-images.githubusercontent.com/64578396/233948834-a961ed97-f562-43d9-9aac-fbebfb457239.png)
+![image](https://user-images.githubusercontent.com/64578396/234015321-b22a0f64-7553-4739-ae99-ab4409e7acc2.png)
