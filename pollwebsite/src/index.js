@@ -7,19 +7,21 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Root from './routes/root';
 import Take from './routes/Take';
+import Create from './routes/Create';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
+  //<React.StrictMode>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Root />}>
           <Route index element={<Login />} />
           <Route path='/takepoll' element={<Take />} />
+          <Route path='/createpoll' element={<Create />} />
           <Route path='/penis' element={<App />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  </React.StrictMode>
+  //</React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

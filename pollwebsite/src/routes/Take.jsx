@@ -16,7 +16,7 @@ export default function Take() {
                     <Spinner options={["option 1", "option 2", "option 3"]}></Spinner>
                 </div>
                 <div id="ending">
-                    <Button text={"finish"}></Button>
+                    <Button text={"submit"}></Button>
                 </div>
             </div>
         </div>

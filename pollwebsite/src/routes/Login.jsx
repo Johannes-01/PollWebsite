@@ -24,6 +24,10 @@ export default function Login() {
         navigate("/takepoll");
     };
 
+    const createpoll = () => {
+        navigate("/createpoll");
+    };
+
     return (
         <div id="login-root">
             <div id="dialogue">
@@ -34,10 +38,10 @@ export default function Login() {
                             <TextField title={"E-Mail"}></TextField>
                             <TextField title={"Password"}></TextField>
                         </div>
-                        <Button text={"submit"} onclick={login}></Button>
+                        <Button text={"login"} onclick={login}></Button>
                     </div>
                     <div id="dialogue-choice">
-                        <Button text={"Create poll"}></Button>
+                        <Button text={"Create poll"} onclick={createpoll}></Button>
                         <Button text={"Take poll"} onclick={takepoll}></Button>
                     </div>
                 </div>

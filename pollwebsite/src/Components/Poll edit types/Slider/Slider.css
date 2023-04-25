@@ -1,0 +1,99 @@
+#slider {
+    padding: 10px;
+    padding-right: 0ps;
+    flex: 1;
+}
+
+#slider-wrapper {
+    display: flex;
+    padding-left: 5px;
+}
+
+#slider-wrapper p {
+    user-select: none;
+    margin: 0 0 0 15px;
+    width: 50px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#slider-wrapper #bar {
+    height: 8px;
+    border-radius: 20px;
+    background: var(--grey1);
+    position: relative;
+    margin: 5px 0;
+    flex: 1;
+}
+
+#slider-wrapper #bar #bar-inner {
+    background-color: var(--accent);
+    height: 100%;
+    border-radius: 20px;
+    width: 0px;
+    position: absolute;
+}
+
+#slider-wrapper #bar #bar-handle {
+    height: 16px;
+    width: 8px;
+    border-radius: 2px;
+    background: var(--white);
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    cursor: grab;
+}
+
+#slider-wrapper #bar #bar-handle:active {
+    cursor: grabbing;
+}
+
+/* ===================== */
+#slider-edit-wrapper {
+    position: relative;
+    display: flex;
+    background: var(--grey2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+#slider-edit-draghandle-wrapper {
+    position: relative;
+    width: 30px;
+    padding-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#slider-edit-draghandle {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+}
+#slider-edit-draghandle div {
+    height: 15%;
+    margin: 1px 0;
+    background: #5f6266;
+    border-radius: 1px;
+}
+
+#slider > p, #slider > h2 {
+    background-color: transparent;
+    outline: 2px solid transparent;
+    transition: background-color 0.15s;
+    border-radius: 3px;
+    cursor: pointer;
+    user-select: none!important;
+}
+
+#slider > p:hover, #slider > h2:hover {
+    background-color: var(--grey1);
+}
+
+#slider > p:focus-visible, #slider > h2:focus-visible {
+    outline: 2px solid var(--accent);
+    border: none;
+    background-color: var(--grey3);
+    cursor: text;
+}
