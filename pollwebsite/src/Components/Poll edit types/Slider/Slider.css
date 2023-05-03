@@ -1,6 +1,6 @@
 #slider {
     padding: 10px;
-    padding-right: 0ps;
+    padding-right: 0px;
     flex: 1;
 }
 
@@ -78,7 +78,9 @@
     border-radius: 1px;
 }
 
-#slider > p, #slider > h2 {
+
+/* TODO move this out of here into a more general file */
+.editable > p, .editable > h2 {
     background-color: transparent;
     outline: 2px solid transparent;
     transition: background-color 0.15s;
@@ -87,11 +89,11 @@
     user-select: none!important;
 }
 
-#slider > p:hover, #slider > h2:hover {
+.editable > p:hover, .editable > h2:hover {
     background-color: var(--grey1);
 }
 
-#slider > p:focus-visible, #slider > h2:focus-visible {
+.editable > p:focus-visible, .editable > h2:focus-visible {
     outline: 2px solid var(--accent);
     border: none;
     background-color: var(--grey3);

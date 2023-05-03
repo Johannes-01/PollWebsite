@@ -8,6 +8,7 @@
 
 .option {
     display: flex;
+    align-items: center;
     margin: 8px;
     padding: 6px;
     border-radius: 3px;

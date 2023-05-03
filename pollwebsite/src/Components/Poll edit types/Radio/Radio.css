@@ -1,23 +1,30 @@
 #radio {
     padding: 10px;
+    padding-right: 0px;
+    flex: 1;
 }
 
 #options-wrapper {
     padding-left: 10px;
 }
 
-.option {
-    display: flex;
+.edit-option {
     margin: 8px;
-    padding: 6px;
     border-radius: 3px;
+}
+
+.edit-option > div {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    padding: 6px;
     cursor: pointer;
     box-sizing: border-box;
-    transition: outline 0.1s;
+    transition: outline 0.1s, box-shadow 0.15s;
     outline: 2px solid transparent;
 }
 
-.option:hover {
+.edit-option:hover {
     /*outline: 2px solid var(--accent);*/
     background: var(--grey1);
 }
@@ -26,17 +33,17 @@
     background-color: var(--grey1);
 }
 
-.option p {
+.edit-option p {
     margin: 0 0 0 10px;
     user-select: none;
 }
 
-.option #custom-checkbox {
+.edit-option #custom-checkbox {
     width: 19px;
     height: 19px;
 }
 
-.option #outer-circle {
+.edit-option #outer-circle {
     width: 100%;
     height: 100%;
     border-radius: 100px;
@@ -48,10 +55,116 @@
     justify-content: center;
 }
 
-.option #inner-circle {
+.edit-option #inner-circle {
     width: 60%;
     height: 60%;
     border-radius: 100px;
     background-color: var(--white);
     display: none;
+}
+
+/* ========================= */
+.options-add {
+    margin-left: 49px;
+}
+
+.options-add > p {
+    font-style: italic;
+    color: grey;
+    width: 100%;
+    padding: 3px;
+}
+
+/*.options-add-adding > p {
+    font-style: normal;
+    color: var(--white);
+}*/
+
+.options-add > p:focus-within {
+    font-style: normal;
+    color: var(--white);
+}
+
+.options-add-adding #outer-circle {
+    opacity: 1!important;
+}
+
+.options-add #outer-circle {
+    opacity: 0.2;
+}
+
+.options-add:hover {
+    background: fixed;
+    cursor: auto;
+}
+
+.edit-option #actions {
+    color: #5f6266;
+    width: 40px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /*display: none;*/
+    opacity: 0;
+}
+
+.edit-option .action {
+    color: var(--white);
+    opacity: 0.15;
+}
+
+.edit-option #handle {
+    margin-right: 10px;
+    cursor: grab;
+}
+
+.edit-option #actions #handle {
+    cursor: grab;
+}
+
+.edit-option #actions #delete {
+    cursor: pointer;
+}
+
+.edit-option:hover #actions {
+    /*display: flex;*/
+    opacity: 1;
+}
+
+.edit-option p {
+    flex: 1;
+}
+
+.edit-option {
+    display: flex;
+    align-items: center;
+    margin: 8px 8px 0 8px;
+    background-color: var(--grey2);
+}
+
+.option-dragging {
+    /*box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.33);*/
+    /*outline: 2px solid var(--accent)!important;*/
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: var(--grey1);
+}
+
+.options-add #actions {
+    width: 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    color: #5f6266;
+}
+
+.options-add #actions #add {
+    padding: 3px;
+    border-radius: 3px;
+    width: 20px;
+    height: 20px;
+    transition: background-color 0.2s;
+}
+.options-add #actions #add:hover {
+    background-color: var(--grey1);
 }

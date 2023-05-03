@@ -10,6 +10,7 @@ import Spinner from "./Poll types/Spinner/Spinner";
 
 // edit types
 import EditSlider from "./Poll edit types/Slider/Slider";
+import EditRadio from "./Poll edit types/Radio/Radio";
 
 export {
     Button,
@@ -21,5 +22,6 @@ export {
     Slider,
     Spinner,
 
-    EditSlider
+    EditSlider,
+    EditRadio
 }

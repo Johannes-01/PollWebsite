@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Radio, Text, Slider, Spinner, EditSlider } from "../Components/components";
+import { Button, Radio, Text, Slider, Spinner, EditSlider, EditRadio } from "../Components/components";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../style/create.css"
 
@@ -9,7 +9,7 @@ function Question({question, index}) {
             {(provided) => {
                 return (
                     <div id="slider-edit-wrapper" {...provided.draggableProps} ref={provided.innerRef}>
-                        <EditSlider></EditSlider>
+                        {question.content}
                         <div id="slider-edit-draghandle-wrapper">
                             <div id="slider-edit-draghandle" {...provided.dragHandleProps}>
                                 <div></div>
@@ -27,9 +27,9 @@ function Question({question, index}) {
 export default function Create() {
 
     let objs = {
-        "my-task-1": {id: "my-task-1", content: "pen 1"},
-        "my-task-2": {id: "my-task-2", content: "pen 2"},
-        "my-task-3": {id: "my-task-3", content: "pen 3"},
+        "my-task-1": {id: "my-task-1", content: <EditSlider />},
+        "my-task-2": {id: "my-task-2", content: <EditRadio />},
+        "my-task-3": {id: "my-task-3", content: <EditSlider />},
     };
     let column = {
         id: "my-column-1",

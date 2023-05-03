@@ -29,7 +29,7 @@ export default function EditSlider({}) {
     };
 
     return (
-        <div id="slider" ref={sliderRef}>
+        <div id="slider" ref={sliderRef} className={"editable"}>
             <h2 contentEditable>Heading</h2>
             <p contentEditable>maybe optional second text</p>
             <div id="slider-wrapper">
