@@ -1,0 +1,57 @@
+#spinner {
+    padding: 10px;
+}
+
+#spinner-button {
+    position: relative;
+    width: 200px;
+    height: 40px;
+    background-color: var(--grey4);
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5px;
+    box-sizing: border-box;
+}
+
+#spinner-options {
+    width: inherit;
+    position: absolute;
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: none;
+    top: 40px;
+    left: 0px;
+}
+
+#arrow-down-wrapper {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#arrow-down {
+    width: 8px;
+    height: 8px;
+    box-sizing: border-box;
+    border-style: none solid solid none;
+    border-color: var(--white);
+    border-width: 2px;
+    transform: rotate(45deg);
+}
+
+#spinner-option {
+    padding: 0 5px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    background: var(--grey3);
+    cursor: pointer;
+}
+
+#spinner-option:hover {
+    background: var(--grey4);
+}
