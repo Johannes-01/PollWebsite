@@ -1,1 +1,0 @@
-﻿ data access layer (DAL) that provides a set of methods to interact with the database. This layer should be responsible for executing SQL commands and returning data to the business layer. You can use the ADO.NET or Entity Framework library to create the DAL.

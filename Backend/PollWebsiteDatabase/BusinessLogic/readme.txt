@@ -1,1 +1,0 @@
-﻿business layer that defines the logic for the application. This layer should interact with the DAL to retrieve and manipulate data. You can use object-oriented programming principles to create classes and methods that represent the entities in the database.
