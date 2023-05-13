@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button, TextField } from "../Components/components";
 import "../style/login.css"
+import PasswordField from "../Components/Input/PasswordField";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ export default function Login() {
                         <h2>Login</h2>
                         <div id="middle">
                             <TextField title={"E-Mail"}></TextField>
-                            <TextField title={"Password"}></TextField>
+                            <PasswordField title={"Password"}></PasswordField>
                         </div>
                         <Button text={"login"} onclick={login}></Button>
                     </div>
