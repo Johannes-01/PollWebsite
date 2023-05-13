@@ -6,6 +6,7 @@
 	border: 1px solid var(--grey4);
     border-radius: 3px;
 	box-sizing: border-box;
+	color: #e6e6e6;
 }
 
 #textfield-wrapper p {
