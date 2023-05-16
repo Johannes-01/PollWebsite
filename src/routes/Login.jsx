@@ -14,13 +14,12 @@ export default function Login() {
             password: 'admin',
         }
         // here goes http request to validate credentials
-        try{
-            const response = await axios.post('localhost:7085/login', loginData)
-            console.log(response.data);
-        } catch (error){
-            console.log(error);
+        try {
+            const response = await axios.post('https://localhost:7085/login', loginData)   
+        } catch (error) {
+            console.error(error)
         }
-        
+            
         // reshape animation if login did not work
 
         // reshape animation for the login div
