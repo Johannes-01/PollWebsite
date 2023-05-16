@@ -2,11 +2,27 @@ import { Link, useNavigate } from "react-router-dom";
 import { Button, TextField } from "../Components/components";
 import "../style/login.css"
 import PasswordField from "../Components/Input/PasswordField";
+import axios from "axios";
 
 export default function Login() {
     const navigate = useNavigate();
 
-    const login = () => {
+    const login = async () => {
+
+        const loginData = {
+            username: 'admin',
+            password: 'admin',
+        }
+        // here goes http request to validate credentials
+        try{
+            const response = await axios.post('localhost:7085/login', loginData)
+            console.log(response.data);
+        } catch (error){
+            console.log(error);
+        }
+        
+        // reshape animation if login did not work
+
         // reshape animation for the login div
         let dialogue = document.getElementById("dialogue");
         dialogue.classList.add("reshape-dialogue-class");
@@ -14,7 +30,7 @@ export default function Login() {
         // fade out for the login ui components
         let dialogue_login = document.getElementById("dialogue-login");
         dialogue_login.classList.add("fadeout");
-
+        
         // fade in for the choice ui components
         let dialogue_choice = document.getElementById("dialogue-choice");
         dialogue_choice.style.display = "flex";
