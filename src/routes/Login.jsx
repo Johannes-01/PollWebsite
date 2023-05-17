@@ -4,6 +4,7 @@ import "../style/login.css"
 import PasswordField from "../Components/Input/PasswordField";
 import axios from "axios";
 import { useState } from "react";
+import Cookies from "js-cookie";
 
 export default function Login() {
     const navigate = useNavigate();
@@ -22,6 +23,8 @@ export default function Login() {
     }
     //#endregion
 
+    const hasSession = Cookies.get("sessionCookie") !== undefined;
+
     const login = async () => {
         // request body
         const loginData = {
@@ -29,12 +32,14 @@ export default function Login() {
             password: PasswordValue,
         }        
 
-        //TO DO: Only show login if not signed in (cookie credentials)
-        //To DO: Handle UI if Login was unsuccessful [status 401]
+        //TO DO: Only show login if not signed in (cookie credentials) cookie provider
+        //TO DO: Handle UI if Login was unsuccessful [status 401]
         try {
             // http request to validate credentials
             const response = await axios.post('https://localhost:7085/login', loginData)   
            if(response.data==="successful"){
+
+
                 // reshape animation for the login div
                 let dialogue = document.getElementById("dialogue");
                 dialogue.classList.add("reshape-dialogue-class");
@@ -49,7 +54,9 @@ export default function Login() {
                 dialogue_choice.classList.add("fadein");
             }
         } catch (error) {
-            console.error('this error'+error)
+            let dialogue_login = document.getElementById("dialogue-login");
+            dialogue_login.classList.add("failed-login-class");
+            dialogue_login.classList.add("fadeout");
         }
     };
 
