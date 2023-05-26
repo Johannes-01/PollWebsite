@@ -3,7 +3,7 @@ import "./Slider.css"
 import { useRef } from "react";
 import { EditText } from "../../components";
 
-export default function EditSlider({}) {
+export default function EditSlider({data, callback, id}) {
     const sliderRef = useRef();
 
     let value = 0;
@@ -19,6 +19,9 @@ export default function EditSlider({}) {
         progress.style.width = value + "px";
         let text = slider.querySelector("#slider-wrapper p");
         text.innerHTML = Math.round(value/slider_width*100) + "%";
+
+        data[id] = Array.from([0, value.toString()]);
+        callback({...data});
     };
 
     const grab = () => {

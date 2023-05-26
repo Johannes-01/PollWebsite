@@ -1,7 +1,7 @@
 import "./TextField.css"
 import { useState } from "react";
 
-export default function PasswordField({title, onInputChange}) {
+export default function PasswordField({title, onInputChange, style}) {
 
     const [inputValue, setInputValue] = useState("");
 
@@ -13,7 +13,7 @@ export default function PasswordField({title, onInputChange}) {
     return (
         <div id="textfield-wrapper">
             <p>{title}</p>
-            <input type="password" value={inputValue} onChange={handleInputChange}></input>
+            <input style={style} type="password" value={inputValue} onChange={handleInputChange}></input>
         </div>
     );
 }

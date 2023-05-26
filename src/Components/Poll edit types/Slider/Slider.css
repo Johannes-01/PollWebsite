@@ -80,7 +80,7 @@
 
 
 /* TODO move this out of here into a more general file */
-.editable > p, .editable > h2 {
+.editable > p, .editable > h2, .editable > h1 {
     background-color: transparent;
     outline: 2px solid transparent;
     transition: background-color 0.15s;
@@ -89,11 +89,11 @@
     user-select: none!important;
 }
 
-.editable > p:hover, .editable > h2:hover {
+.editable > p:hover, .editable > h2:hover, .editable > h1:hover {
     background-color: var(--grey1);
 }
 
-.editable > p:focus-visible, .editable > h2:focus-visible {
+.editable > p:focus-visible, .editable > h2:focus-visible, .editable > h1:focus-visible  {
     outline: 2px solid var(--accent);
     border: none;
     background-color: var(--grey3);

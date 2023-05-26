@@ -4,9 +4,15 @@ import "../style/login.css"
 import PasswordField from "../Components/Input/PasswordField";
 import axios from "axios";
 import { useState } from "react";
+import { createRef } from "react";
+import { useRef } from "react";
 
 export default function Login() {
     const navigate = useNavigate();
+
+    const [username_input_style, set_username_input_style] = useState({});
+    const [password_input_style, set_password_input_style] = useState({});
+    const [info_msg_style, set_info_msg_style] = useState({display: "none", color: "red"});
 
     //#region states 
     const [UsernameValue, setUsernameValue] = useState("");
@@ -22,12 +28,12 @@ export default function Login() {
     }
     //#endregion
 
-    const login = async () => {
+    const login = async (e) => {
         // request body
         const loginData = {
             username: UsernameValue,
             password: PasswordValue,
-        }        
+        }
 
         //TO DO: Only show login if not signed in (cookie credentials)
         //To DO: Handle UI if Login was unsuccessful [status 401]
@@ -49,7 +55,20 @@ export default function Login() {
                 dialogue_choice.classList.add("fadein");
             }
         } catch (error) {
-            console.error('this error'+error)
+            console.error('this error'+error);
+
+            // erstmal beide input felder auf rot setzen
+            set_username_input_style({borderWidth: "1px", borderColor: "red", borderStyle: "solid"});
+            set_password_input_style({borderWidth: "1px", borderColor: "red", borderStyle: "solid"});
+            set_info_msg_style({color: "red", display: "block"});
+
+            let button = e.target;
+            button.classList.add("button-shake");
+            const listener = () => {
+                button.classList.remove("button-shake");
+                button.removeEventListener("animationiteration", listener);
+            }
+            button.addEventListener("animationiteration", listener);
         }
     };
 
@@ -68,10 +87,11 @@ export default function Login() {
                     <div id="dialogue-login">
                         <h2>Login</h2>
                         <div id="middle">
-                            <TextField title={"E-Mail"} onInputChange={handleUsernameChange}></TextField>
-                            <PasswordField title={"Password"} onInputChange={handlePasswordChange}></PasswordField>
+                            <TextField title={"Username"} onInputChange={handleUsernameChange} style={username_input_style} ></TextField>
+                            <PasswordField title={"Password"} onInputChange={handlePasswordChange} style={password_input_style} ></PasswordField>
                         </div>
                         <Button text={"login"} onclick={login}></Button>
+                        <p style={info_msg_style}>Wrong username or password</p>
                     </div>
                     <div id="dialogue-choice">
                         <Button text={"Create poll"} onclick={createpoll}></Button>

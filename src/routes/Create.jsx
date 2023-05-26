@@ -1,9 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import { Button, Radio, Text, Slider, Spinner, EditSlider, EditRadio } from "../Components/components";
+import { Button, Radio, Text, Slider, Spinner, EditSlider, EditRadio, EditText } from "../Components/components";
 import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../style/create.css"
+import { useRef, useState } from "react";
 
-function Question({question, index}) {
+function Question({question, index, updateCallback}) {
     return (
         <Draggable draggableId={question.id} index={index}>
             {(provided) => {
@@ -26,45 +27,107 @@ function Question({question, index}) {
 
 export default function Create() {
 
-    let objs = {
-        "my-task-1": {id: "my-task-1", content: <EditSlider />},
-        "my-task-2": {id: "my-task-2", content: <EditRadio />},
-        "my-task-3": {id: "my-task-3", content: <EditSlider />},
+    const [questions, set_questions] = useState([]);
+    const [column, set_column] = useState([]);
+    const [questionData, setQuestionData] = useState({});
+    const headingRef = useRef();
+    const pollDescriptionRef = useRef();
+
+    const addSlider = () => {
+        let new_id = "id_" + Object.keys(questions).length.toString();
+        let element = <EditSlider data={questionData} callback={setQuestionData} id={new_id} />;
+        let new_question = {id: new_id, content: element};
+        set_questions([...questions, new_question]);
+        set_column([...column, new_id]);
     };
-    let column = {
-        id: "my-column-1",
-        title: "mein titel",
-        ids: ["my-task-1", "my-task-2", "my-task-3"],
+    const addText = () => {
+        let new_id = "id_" + Object.keys(questions).length.toString();
+        let element = <EditText data={questionData} callback={setQuestionData} id={new_id} />;
+        let new_question = {id: new_id, content: element};
+        set_questions([...questions, new_question]);
+        set_column([...column, new_id]);
+    };
+    const addRadio = () => {
+        let new_id = "id_" + Object.keys(questions).length.toString();
+        let element = <EditRadio data={questionData} callback={setQuestionData} id={new_id} />;
+        let new_question = {id: new_id, content: element};
+        set_questions([...questions, new_question]);
+        set_column([...column, new_id]);
     };
 
+    const submit = () => {
+        const order = column.map(questionId => {
+            for(let i = 0; i < questions.length; i++) {
+                if (questions[i].id === questionId) {
+                    return questions[i];
+                }
+            }
+            return null;
+        });
+        let orderedQuestions = order.map((v, i) => questionData[v.id]);
+        console.log(orderedQuestions);
+        let form = {
+            "title": headingRef.current.innerText,
+            "description": pollDescriptionRef.current.innerText,
+            "author": null,
+            "startDate": null,
+            "endDate": null,
+            "questions": null,
+        };
+        form["questions"] = orderedQuestions.map((v, i) => ({
+            "index": i,
+            "type": v[0],
+            "value": v[1],
+        }));
+        console.log(form);
+    };
+
+    console.log(questionData)
     return (
         <div id="create-root">
             <div id="create-wrapper">
-                <h1>Heading</h1>
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,</p>
+                <div id="create-heading" className="editable">
+                <h1 ref={headingRef} contentEditable>Heading</h1>
+                <p ref={pollDescriptionRef} contentEditable>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,</p>
+                </div>
                 <DragDropContext onDragEnd={(result) => {
                     const { destination, source, draggableId } = result;
                     if (!destination) return;
                     if (destination.droppableId === source.droppableId && destination.index === source.index) return;
 
-                    const newOrder = Array.from(column.ids);
+                    const newOrder = Array.from(column);
                     newOrder.splice(source.index, 1);
                     newOrder.splice(destination.index, 0, draggableId);
 
-                    column.ids = newOrder;
+                    set_column(newOrder);
                 }}>
-                    <Droppable key={column.id} droppableId={column.id}>
+                    <Droppable key={"my-column"} droppableId={"my-column"}>
                         {(provided) => {
-                            const questions = column.ids.map(questionId => objs[questionId]);
-                            return (<div id="poll-inner" {...provided.droppableProps} ref={provided.innerRef}>
-                                {questions.map((v, i) => {return <Question key={v.id} question={v} index={i} />})}
+                            const order = column.map(questionId => {
+                                for(let i = 0; i < questions.length; i++) {
+                                    if (questions[i].id === questionId) {
+                                        return questions[i];
+                                    }
+                                }
+                                return null;
+                            });
+                            
+                            return (<><div id="poll-inner" {...provided.droppableProps} ref={provided.innerRef}>
+                                {order.map((v, i) => { return <Question key={v.id} question={v} index={i} />; })}
                                 {provided.placeholder}
-                            </div>);
+                                <div id="add-button-wrapper">
+                                    <Button text={"Add Slider"} onclick={addSlider} />
+                                    <Button text={"Add Multiple choice"} onclick={addRadio} />
+                                    <Button text={"Add Edit Text"} onclick={addText} />
+                                </div>
+                            </div>
+                            </>
+                );
                         }}
                     </Droppable>
                 </DragDropContext>
                 <div id="ending">
-                    <Button text={"save?"}></Button>
+                    <Button text={"save"} onclick={submit}></Button>
                 </div>
             </div>
         </div>

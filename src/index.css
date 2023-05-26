@@ -61,3 +61,18 @@ code {
   animation: reshape-dialogue 0.5s linear 0s 1 forwards;
   animation-timing-function: cubic-bezier(1, 0, 0, 1);
 }
+
+@keyframes button-shake {
+  0% {margin-left: 0px;}
+  25% {margin-left: -8px;}
+  50% {margin-left: 0px;}
+  75% {margin-left: 8px;}
+  100% {margin-left: 0px;}
+}
+
+.button-shake {
+  animation-name: button-shake;
+  animation-duration: 0.2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}

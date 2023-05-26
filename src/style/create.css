@@ -29,3 +29,11 @@
 #create-wrapper > p {
     margin: 0 0 10px 10px;
 }
+
+#add-button-wrapper {
+    display: flex;
+}
+
+#create-heading > p {
+    margin: 10px;
+}

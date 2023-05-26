@@ -1,7 +1,7 @@
 import "./TextField.css"
 import { useState } from "react";
 
-export default function TextField({title, onInputChange}) {
+export default function TextField({title, onInputChange, style}) {
 
     const [inputValue, setInputValue] = useState("");
 
@@ -13,7 +13,7 @@ export default function TextField({title, onInputChange}) {
     return (
         <div id="textfield-wrapper">
             <p>{title}</p>
-            <input value={inputValue} onChange={handleInputChange}></input>
+            <input style={style} value={inputValue} onChange={handleInputChange}></input>
         </div>
     );
 }

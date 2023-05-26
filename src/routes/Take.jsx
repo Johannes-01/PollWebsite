@@ -7,6 +7,7 @@ export default function Take() {
     return (
         <div id="poll-root">
             <div id="poll-wrapper">
+                <div id="backbutton"></div>
                 <h1>Heading</h1>
                 <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,</p>
                 <div id="poll-inner">
@@ -17,6 +18,7 @@ export default function Take() {
                 </div>
                 <div id="ending">
                     <Button text={"submit"}></Button>
+                    <Button text={"cancel"} style={{"background": "var(--grey1)"}}></Button>
                 </div>
             </div>
         </div>

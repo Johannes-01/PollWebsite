@@ -11,6 +11,13 @@
 
 #poll-wrapper {
     flex: 0.5;
+    position: relative;
+}
+
+#backbutton {
+    position: absolute;
+    left: -40px;
+    margin-top: 10px;
 }
 
 #poll-inner {

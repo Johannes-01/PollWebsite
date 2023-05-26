@@ -6,7 +6,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faCheck } from "@fortawesome/free-solid-svg-icons";
 
-export default function EditRadio({ }) {
+export default function EditRadio({data, callback, id}) {
     let radioRef = useRef();
 
     const [options, setOptions] = useState([
@@ -25,6 +25,14 @@ export default function EditRadio({ }) {
         let newOptions = Array.from(options);
         newOptions.push({id: c, content: c});
         setOptions(newOptions);
+
+        // passing newOrder here because the options variable isn't updated quick enough
+        onChange(newOptions);
+    };
+
+    const onChange = (order) => {
+        data[id] = [2, Array.from(order.map(v => v.content))];
+        callback({...data});
     };
 
     return (
@@ -41,15 +49,23 @@ export default function EditRadio({ }) {
                 newOrder.splice(destination.index, 0, options.find(v => v.id === draggableId));
 
                 setOptions(newOrder);
+
+                // passing newOrder here because the options variable isn't updated quick enough
+                onChange(newOrder);
             }}>
                 <div id="options-wrapper">
                     <Droppable key={"testcolumn"} droppableId={"testcolumn"}>
                         {(provided) => {
                             return <div ref={provided.innerRef} {...provided.droppableProps}>
                                 {options.map((option, i) => {return (<Option key={option.id} option={option} index={i} onDelete={() => {
+                                    // this function block has to stay in here, don't know why, but it breaks stuff
+                                    // if it is moved!!!
                                     let newOrder = Array.from(options);
                                     newOrder.splice(newOrder.findIndex(v => {return v.id === option.id;}), 1);
                                     setOptions(newOrder);
+
+                                    // passing newOrder here because the options variable isn't updated quick enough
+                                    onChange(newOrder);
                                 }}></Option>);})}
                                 {provided.placeholder}
                                 </div>;

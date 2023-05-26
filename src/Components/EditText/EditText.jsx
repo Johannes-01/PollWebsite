@@ -1,11 +1,18 @@
 import React from "react";
 import "./EditText.css"
-import { useRef } from "react";
 
-export default function EditText({}) {
+export default function EditText({data, callback, id}) {
+
+    const onChange = (e) => {
+        data[id] = [1, e.target.value];
+        callback({...data});
+    };
+
     return (
-        <div id="edittext">
-            <input type={"text"} defaultValue={"maybe optional second text"}></input>
+        <div id="edittext" className="editable">
+            <h2 contentEditable>Heading</h2>
+            <p contentEditable>maybe optional second text</p>
+            <textarea onChange={onChange}></textarea>
         </div>
     );
 }

@@ -9,3 +9,26 @@
     height: 25px;
     font-size: 12pt;
 }
+
+#edittext {
+    padding: 10px;
+    flex: 1;
+}
+
+#edittext textarea {
+    resize: vertical;
+    width: 100%;
+    border: none;
+    border-radius: 3px;
+    background-color: var(--grey4);
+    color: var(--white);
+    box-sizing: border-box;
+    padding: 3px;
+    outline: 2px solid transparent;
+
+    transition: outline 0.15s;
+}
+
+#edittext textarea:focus {
+    outline: 2px solid var(--accent);
+}
