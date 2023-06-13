@@ -2,7 +2,7 @@ import React from "react";
 import "./Slider.css"
 import { useRef } from "react";
 
-export default function Slider({}) {
+export default function Slider({id, dispatch}) {
     const sliderRef = useRef();
 
     let value = 0;
@@ -18,6 +18,8 @@ export default function Slider({}) {
         progress.style.width = value + "px";
         let text = slider.querySelector("#slider-wrapper p");
         text.innerHTML = Math.round(value/slider_width*100) + "%";
+
+        dispatch({id: id, answer: Math.floor(value/slider_width*100)});
     };
 
     const grab = () => {

@@ -3,7 +3,7 @@ import React from "react";
 import "./Radio.css"
 import Option from "./Option";
 
-export default function Radio({options}) {
+export default function Radio({options, id, dispatch}) {
     let current_selected = null;
     const select = (obj) => {
         if (obj === null) return;
@@ -15,6 +15,8 @@ export default function Radio({options}) {
         current_selected = obj;
         element.classList.add("option-chosen");
         element.querySelector("#inner-circle").style.display = "block";
+
+        dispatch({id: id, answer: current_selected.target.textContent});
     };
     let option_list = options.map((option, i) => <Option onClick={select} content={option}></Option>);
 

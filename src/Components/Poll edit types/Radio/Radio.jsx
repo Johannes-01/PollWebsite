@@ -1,13 +1,14 @@
-import { useNavigate } from "react-router-dom";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Radio.css"
 import Option from "./Option";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAdd, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faAdd } from "@fortawesome/free-solid-svg-icons";
 
-export default function EditRadio({data, callback, id}) {
+export default function EditRadio({id, dispatch}) {
     let radioRef = useRef();
+    const headingRef = useRef();
+    const descriptionRef = useRef();
 
     const [options, setOptions] = useState([
         {id: "my-id-1", content:"option 1"},
@@ -30,15 +31,21 @@ export default function EditRadio({data, callback, id}) {
         onChange(newOptions);
     };
 
+    const onOptionTextChange = (id, content) => {
+        console.log(id, content);
+        options[options.findIndex(v => v.id === id)].content = content
+        setOptions(options);
+        onChange(options);
+    };
+
     const onChange = (order) => {
-        data[id] = [2, Array.from(order.map(v => v.content))];
-        callback({...data});
+        dispatch({id: id, type: 2, value: Array.from(Array.from(order.map(v => v.content))), heading: headingRef.current.innerText, description: descriptionRef.current.innerText});
     };
 
     return (
         <div id="radio" className={"editable"} ref={radioRef}>
-            <h2 contentEditable>Heading</h2>
-            <p contentEditable>maybe optional second text</p>
+            <h2 ref={headingRef} onInput={() => {onChange(options);}} contentEditable>Heading</h2>
+            <p ref={descriptionRef} onInput={() => {onChange(options);}} contentEditable>maybe optional second text</p>
             <DragDropContext onDragEnd={(result) => {
                 const { destination, source, draggableId } = result;
                 if (!destination) return;
@@ -66,7 +73,7 @@ export default function EditRadio({data, callback, id}) {
 
                                     // passing newOrder here because the options variable isn't updated quick enough
                                     onChange(newOrder);
-                                }}></Option>);})}
+                                }} onHighLvlChange={onOptionTextChange}></Option>);})}
                                 {provided.placeholder}
                                 </div>;
                         }}

@@ -1,13 +1,14 @@
 import React from "react";
 import "./Slider.css"
 import { useRef } from "react";
-import { EditText } from "../../components";
 
-export default function EditSlider({data, callback, id}) {
+export default function EditSlider({id, dispatch}) {
     const sliderRef = useRef();
+    const headingRef = useRef();
+    const descriptionRef = useRef();
 
     let value = 0;
-
+    /* doesn't work when not being touched once in edit view for some reason */
     const drag = (e) => {
         let slider = sliderRef.current;
         let slider_width = slider.querySelector("#slider-wrapper #bar").clientWidth;
@@ -20,8 +21,7 @@ export default function EditSlider({data, callback, id}) {
         let text = slider.querySelector("#slider-wrapper p");
         text.innerHTML = Math.round(value/slider_width*100) + "%";
 
-        data[id] = Array.from([0, value.toString()]);
-        callback({...data});
+        dispatch({id: id, type: 0, value: Math.round(value/slider_width*100).toString(), heading: headingRef.current.innerText, description: descriptionRef.current.innerText});
     };
 
     const grab = () => {
@@ -33,8 +33,8 @@ export default function EditSlider({data, callback, id}) {
 
     return (
         <div id="slider" ref={sliderRef} className={"editable"}>
-            <h2 contentEditable>Heading</h2>
-            <p contentEditable>maybe optional second text</p>
+            <h2 ref={headingRef} contentEditable>Heading</h2>
+            <p ref={descriptionRef} contentEditable>maybe optional second text</p>
             <div id="slider-wrapper">
                 <div id="bar">
                     <div id="bar-inner"></div>

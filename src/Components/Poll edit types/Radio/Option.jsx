@@ -3,8 +3,13 @@ import { faCheck, faCoffee, faTrash, faXmark, faGripVertical, faGripLines } from
 import { Draggable } from "react-beautiful-dnd";
 import { useRef } from "react";
 
-export default function Option({ option, onClick, index, onDelete }) {
+export default function Option({ option, onClick, index, onDelete, onHighLvlChange}) {
     const r = useRef();
+
+    const onChange = (e) => {
+        onHighLvlChange(option.id, e.target.textContent);
+    };
+
     return (
         <Draggable draggableId={option.id} index={index}>
             {(provided, snapshot) => {
@@ -18,7 +23,7 @@ export default function Option({ option, onClick, index, onDelete }) {
                                 <div id="inner-circle"></div>
                             </div>
                         </div>
-                        <p contentEditable>{option.content}</p>
+                        <p onInput={onChange} contentEditable>{option.content}</p>
                         <div id="actions">
                             {/*<FontAwesomeIcon icon={faCheck} />*/}
                             <FontAwesomeIcon id="delete" icon={faXmark} onClick={onDelete} /> {/* only show on hover!!!! */}
