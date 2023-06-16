@@ -45,22 +45,6 @@ export default function Login() {
         setLoginLoading(true);
         let response = null;
         try {
-            /*response = await axios({
-                method: "post",
-                url: 'https://' + endpoint + '/login',
-                data: JSON.stringify(loginData),
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "**",
-                },
-                withCredentials: true,
-            })*/
-            /*await axios.post('https://' + endpoint + '/login', JSON.stringify(loginData), {
-                headers: {
-                    "Content-Type": "application/json",
-                    "Accept": "**",
-                },
-            })*/
             response = await fetch('https://' + endpoint + '/login', {
                 method: "post",
                 headers: {
