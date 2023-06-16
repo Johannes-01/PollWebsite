@@ -98,6 +98,10 @@ export default function Login() {
         navigate("/createpoll");
     };
 
+    const signUp = () => {
+        navigate("/signup");
+    };
+
     return (
         <div id="login-root">
             <div id="dialogue">
@@ -109,7 +113,8 @@ export default function Login() {
                             <PasswordField title={"Password"} onInputChange={handlePasswordChange} style={password_input_style} ></PasswordField>
                         </div>
                         <Button text={"login"} onclick={login} loading={loginLoading}></Button>
-                        <div style={{"color": "var(--white)","text-decoration-line": "underline", "cursor": "pointer"}}>
+                        <div style={{"color": "var(--white)","text-decoration-line": "underline", "cursor": "pointer", "marginTop": "3px", "fontSize": "13px"}}
+                        onClick={signUp}>
                             <a>Sign up</a>
                         </div>
                         <p style={info_msg_style}>Wrong username or password</p>

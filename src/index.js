@@ -8,6 +8,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Root from './routes/root';
 import Take from './routes/Take';
 import Create from './routes/Create';
+import SignUp from './routes/SignUp';
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='/takepoll' element={<Take />} />
         <Route path='/createpoll' element={<Create />} />
         <Route path='/penis' element={<App />} />
+        <Route path='/signup' element={<SignUp />} />
       </Route>
     </Routes>
   </BrowserRouter>

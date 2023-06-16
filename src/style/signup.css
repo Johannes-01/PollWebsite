@@ -1,0 +1,10 @@
+#dialogue-signup {
+    position: relative;
+	background: var(--grey2);
+    border: 1px solid var(--grey1);
+	width: min-content;
+	border-radius: 10px;
+    padding: 30px;
+    width: 350px;
+    height: 530px;
+}
