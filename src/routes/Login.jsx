@@ -1,18 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import { Button, TextField } from "../Components/components";
 import "../style/login.css"
 import PasswordField from "../Components/Input/PasswordField";
-import axios from "axios";
+import axios, { HttpStatusCode } from "axios";
 import { useState } from "react";
 import { createRef } from "react";
 import { useRef } from "react";
 
 export default function Login() {
     const navigate = useNavigate();
+    const endpoint = "185.84.80.172:7085"
+
+    const [loginLoading, setLoginLoading] = useState(false);
 
     const [username_input_style, set_username_input_style] = useState({});
     const [password_input_style, set_password_input_style] = useState({});
-    const [info_msg_style, set_info_msg_style] = useState({display: "none", color: "red"});
+    const [info_msg_style, set_info_msg_style] = useState({ display: "none", color: "red" });
 
     //#region states 
     const [UsernameValue, setUsernameValue] = useState("");
@@ -21,9 +24,9 @@ export default function Login() {
         setUsernameValue(newValue);
     }
 
-    const[PasswordValue, setPasswordValue] = useState("");
+    const [PasswordValue, setPasswordValue] = useState("");
 
-    function handlePasswordChange(newValue){
+    function handlePasswordChange(newValue) {
         setPasswordValue(newValue);
     }
     //#endregion
@@ -37,30 +40,61 @@ export default function Login() {
 
         //TO DO: Only show login if not signed in (cookie credentials)
         //To DO: Handle UI if Login was unsuccessful [status 401]
+        // http request to validate credentials
+        console.log("trying to log in ...");
+        setLoginLoading(true);
+        let response = null;
         try {
-            // http request to validate credentials
-            const response = await axios.post('https://localhost:7085/login', loginData)   
-           if(response.data==="successful"){
-                // reshape animation for the login div
-                let dialogue = document.getElementById("dialogue");
-                dialogue.classList.add("reshape-dialogue-class");
-
-                // fade out for the login ui components
-                let dialogue_login = document.getElementById("dialogue-login");
-                dialogue_login.classList.add("fadeout");
-                
-                // fade in for the choice ui components
-                let dialogue_choice = document.getElementById("dialogue-choice");
-                dialogue_choice.style.display = "flex";
-                dialogue_choice.classList.add("fadein");
-            }
+            /*response = await axios({
+                method: "post",
+                url: 'https://' + endpoint + '/login',
+                data: JSON.stringify(loginData),
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "**",
+                },
+                withCredentials: true,
+            })*/
+            /*await axios.post('https://' + endpoint + '/login', JSON.stringify(loginData), {
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "**",
+                },
+            })*/
+            response = await fetch('https://' + endpoint + '/login', {
+                method: "post",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "*/*",
+                    "cookie": "",
+                },
+                body: JSON.stringify(loginData),
+                credentials: "include",
+            })
         } catch (error) {
-            console.error('this error'+error);
+            console.error('this error' + error);
+        }
+        setLoginLoading(false);
+        console.log(response);
+        console.log(response.headers['set-cookie'])
+        if (response !== null && response.status === 200) {
+            // reshape animation for the login div
+            let dialogue = document.getElementById("dialogue");
+            dialogue.classList.add("reshape-dialogue-class");
 
+            // fade out for the login ui components
+            let dialogue_login = document.getElementById("dialogue-login");
+            dialogue_login.classList.add("fadeout");
+
+            // fade in for the choice ui components
+            let dialogue_choice = document.getElementById("dialogue-choice");
+            dialogue_choice.style.display = "flex";
+            dialogue_choice.classList.add("fadein");
+        } else {
             // erstmal beide input felder auf rot setzen
-            set_username_input_style({borderWidth: "1px", borderColor: "red", borderStyle: "solid"});
-            set_password_input_style({borderWidth: "1px", borderColor: "red", borderStyle: "solid"});
-            set_info_msg_style({color: "red", display: "block"});
+            set_username_input_style({ borderWidth: "1px", borderColor: "red", borderStyle: "solid" });
+            set_password_input_style({ borderWidth: "1px", borderColor: "red", borderStyle: "solid" });
+            set_info_msg_style({ color: "red", display: "block" });
 
             let button = e.target;
             button.classList.add("button-shake");
@@ -90,7 +124,7 @@ export default function Login() {
                             <TextField title={"Username"} onInputChange={handleUsernameChange} style={username_input_style} ></TextField>
                             <PasswordField title={"Password"} onInputChange={handlePasswordChange} style={password_input_style} ></PasswordField>
                         </div>
-                        <Button text={"login"} onclick={login}></Button>
+                        <Button text={"login"} onclick={login} loading={loginLoading}></Button>
                         <p style={info_msg_style}>Wrong username or password</p>
                     </div>
                     <div id="dialogue-choice">
