@@ -3,6 +3,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import "../style/create.css"
 import { useRef, useState } from "react";
 import { useReducer } from "react";
+import axios from "axios";
 
 function Question({ question, index, updateCallback }) {
     return (
@@ -79,9 +80,9 @@ export default function Create() {
         let form = {
             "title": headingRef.current.innerText,
             "description": pollDescriptionRef.current.innerText,
-            "author": null,
-            "startDate": null,
-            "endDate": null,
+            "author": 0,
+            "startDate": "2023-06-14T06:43:49.022Z",
+            "endDate": "2023-07-14T06:43:49.022Z",
             "questions": null,
         };
         form["questions"] = orderedQuestions.map((v, i) => {
@@ -95,6 +96,17 @@ export default function Create() {
             }
         });
         console.log(JSON.stringify(form, null, 2));
+        console.log("starting request...");
+        const response = axios({
+            method: 'post',
+            url: "https://185.84.80.172:7085/polls/create",
+            data: JSON.stringify(form),
+            withCredentials: true,
+            headers: {
+                "Content-Type": "application/json",
+            }
+        });
+        console.log(response);
     };
 
     return (
