@@ -4,6 +4,9 @@ import "../style/create.css"
 import { useRef, useState } from "react";
 import { useReducer } from "react";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons"
+import { useNavigate } from "react-router-dom";
 
 function Question({ question, index, updateCallback }) {
     return (
@@ -27,7 +30,7 @@ function Question({ question, index, updateCallback }) {
 }
 
 export default function Create() {
-
+    const navigate = useNavigate();
     const [questions, set_questions] = useState([]);
     const [column, set_column] = useState([]);
     const [questionData, setQuestionData] = useState({});
@@ -109,8 +112,17 @@ export default function Create() {
         console.log(response);
     };
 
+    const goBack = () => {
+        navigate(-1);
+    };
+
     return (
         <div id="create-root">
+            <div style={{"height": "100%", "flex": "0.5 1"}}>
+                <div style={{"padding": "15px", "display": "flex", "justifyContent": "start"}}>
+                    <FontAwesomeIcon icon={faArrowLeft} style={{"width": "30px", "height": "30px", "cursor": "pointer", "color": "rgb(104, 111, 119)"}} onClick={goBack}/>
+                </div>
+            </div>
             <div id="create-wrapper">
                 <div id="create-heading" className="editable">
                     <h1 ref={headingRef} contentEditable>Heading</h1>
@@ -154,6 +166,14 @@ export default function Create() {
                 </DragDropContext>
                 <div id="ending">
                     <Button text={"save"} onclick={submit}></Button>
+                </div>
+            </div>
+            <div style={{"height": "100%", "flex": "0.5 1"}}>
+                <div style={{"padding": "20px", "display": "flex", "justifyContent": "end"}}>
+                    <div style={{"cursor": "pointer", "display": "flex", "alignItems": "center"}}>
+                        <span style={{"marginRight": "3px", "fontWeight": "bold", "color": "rgb(104, 111, 119)"}}>Logout</span>
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} style={{"width": "30px", "height": "20px", "color": "#686f77"}} />
+                    </div>
                 </div>
             </div>
         </div>

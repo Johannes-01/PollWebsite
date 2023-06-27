@@ -6,6 +6,15 @@ import axios, { HttpStatusCode } from "axios";
 import { useState } from "react";
 import { createRef } from "react";
 import { useRef } from "react";
+import { isLoggedIn } from "..";
+import React from "react";
+
+function setCookie(cname,cvalue,exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
 
 export default function Login() {
     const navigate = useNavigate();
@@ -30,6 +39,27 @@ export default function Login() {
         setPasswordValue(newValue);
     }
     //#endregion
+
+    React.useEffect(() => {
+        if (isLoggedIn()) {
+            loginAnimation();
+        }
+    }, []);
+
+    const loginAnimation = () => {
+        // reshape animation for the login div
+        let dialogue = document.getElementById("dialogue");
+        dialogue.classList.add("reshape-dialogue-class");
+
+        // fade out for the login ui components
+        let dialogue_login = document.getElementById("dialogue-login");
+        dialogue_login.classList.add("fadeout");
+
+        // fade in for the choice ui components
+        let dialogue_choice = document.getElementById("dialogue-choice");
+        dialogue_choice.style.display = "flex";
+        dialogue_choice.classList.add("fadein");
+    };
 
     const login = async (e) => {
         // request body
@@ -62,18 +92,8 @@ export default function Login() {
         console.log(response);
         console.log(response.headers['set-cookie'])
         if (response !== null && response.status === 200) {
-            // reshape animation for the login div
-            let dialogue = document.getElementById("dialogue");
-            dialogue.classList.add("reshape-dialogue-class");
-
-            // fade out for the login ui components
-            let dialogue_login = document.getElementById("dialogue-login");
-            dialogue_login.classList.add("fadeout");
-
-            // fade in for the choice ui components
-            let dialogue_choice = document.getElementById("dialogue-choice");
-            dialogue_choice.style.display = "flex";
-            dialogue_choice.classList.add("fadein");
+            setCookie("isLoggedIn", true, 10);
+            loginAnimation();
         } else {
             // erstmal beide input felder auf rot setzen
             set_username_input_style({ borderWidth: "1px", borderColor: "red", borderStyle: "solid" });
@@ -91,7 +111,11 @@ export default function Login() {
     };
 
     const takepoll = () => {
-        navigate("/takepoll");
+        let pollId = null;
+        while (pollId === null || pollId === "") {
+            pollId = window.prompt("enter poll id");
+        }
+        navigate("/takepoll", {state: {pollId: pollId}});
     };
 
     const createpoll = () => {
@@ -107,14 +131,14 @@ export default function Login() {
             <div id="dialogue">
                 <div id="dialogue-padding">
                     <div id="dialogue-login">
-                        <h2>Login</h2>
+                        <h2 style={{"marginBottom": "40px"}}>Login</h2>
                         <div id="middle">
-                            <TextField title={"Username"} onInputChange={handleUsernameChange} style={username_input_style} ></TextField>
-                            <PasswordField title={"Password"} onInputChange={handlePasswordChange} style={password_input_style} ></PasswordField>
+                            <TextField title={"Username"} onInputChange={handleUsernameChange} style={username_input_style} tabIndex={"1"}></TextField>
+                            <PasswordField title={"Password"} onInputChange={handlePasswordChange} style={password_input_style} tabIndex={"2"}></PasswordField>
                         </div>
-                        <Button text={"login"} onclick={login} loading={loginLoading}></Button>
-                        <div style={{"color": "var(--white)","text-decoration-line": "underline", "cursor": "pointer", "marginTop": "3px", "fontSize": "13px"}}
-                        onClick={signUp}>
+                        <Button text={"login"} onclick={login} loading={loginLoading} style={{"marginTop": "60px"}} tabIndex={"3"}></Button>
+                        <div style={{"color": "var(--white)", "textDecorationLine": "underline", "cursor": "pointer", "marginTop": "3px", "fontSize": "13px"}}
+                        onClick={signUp} tabIndex={"4"}>
                             <a>Sign up</a>
                         </div>
                         <p style={info_msg_style}>Wrong username or password</p>
