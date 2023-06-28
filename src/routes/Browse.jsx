@@ -123,7 +123,6 @@ export default function Browse() {
                     {polls}
                 </div>
             </div>
-            <div style={{ "height": "100%", "flex": "0.5 1" }}></div>
             <div style={{"height": "100%", "flex": "0.5 1"}}>
                 <div style={{"padding": "20px", "display": "flex", "justifyContent": "end"}}>
                     <div style={{"cursor": "pointer", "display": "flex", "alignItems": "center"}}>
