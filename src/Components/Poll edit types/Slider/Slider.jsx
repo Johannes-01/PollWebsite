@@ -33,8 +33,8 @@ export default function EditSlider({id, dispatch}) {
 
     return (
         <div id="slider" ref={sliderRef} className={"editable"}>
-            <h2 ref={headingRef} contentEditable>Heading</h2>
-            <p ref={descriptionRef} contentEditable>maybe optional second text</p>
+            <h2 ref={headingRef} contentEditable>Your Question</h2>
+            <p ref={descriptionRef} contentEditable>Optional Text</p>
             <div id="slider-wrapper">
                 <div id="bar">
                     <div id="bar-inner"></div>

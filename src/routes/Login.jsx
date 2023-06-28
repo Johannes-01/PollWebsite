@@ -9,7 +9,7 @@ import { useRef } from "react";
 import { isLoggedIn } from "..";
 import React from "react";
 
-function setCookie(cname,cvalue,exdays) {
+export function setCookie(cname,cvalue,exdays) {
     const d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     let expires = "expires=" + d.toUTCString();
@@ -92,7 +92,7 @@ export default function Login() {
         console.log(response);
         console.log(response.headers['set-cookie'])
         if (response !== null && response.status === 200) {
-            setCookie("isLoggedIn", true, 10);
+            setCookie("isLoggedIn", true, 1);
             loginAnimation();
         } else {
             // erstmal beide input felder auf rot setzen
@@ -108,6 +108,10 @@ export default function Login() {
             }
             button.addEventListener("animationiteration", listener);
         }
+    };
+
+    const browsePolls = () => {
+        navigate("/browse");
     };
 
     const takepoll = () => {
@@ -148,6 +152,9 @@ export default function Login() {
                         <Button text={"Take poll"} onclick={takepoll}></Button>
                     </div>
                 </div>
+            </div>
+            <div style={{"position": "absolute", "bottom": "10px"}}>
+                <span style={{"color": "#8e8e8e", "textDecorationLine": "underline", "cursor": "pointer"}} onClick={browsePolls}>Browse polls</span>
             </div>
         </div>
     );

@@ -8,6 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons"
 import { useNavigate } from "react-router-dom";
 
+export function setCookie(cname,cvalue,exdays) {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
 function Question({ question, index, updateCallback }) {
     return (
         <Draggable draggableId={question.id} index={index}>
@@ -42,6 +49,7 @@ export default function Create() {
         setQuestionData({...questionData});
     };
     const [state, dispatch] = useReducer(reducer, {});
+    const endpoint = "185.84.80.172:7085"
 
     const addSlider = () => {
         let new_id = "id_" + Object.keys(questions).length.toString();
@@ -49,6 +57,7 @@ export default function Create() {
         let new_question = { id: new_id, content: element };
         set_questions([...questions, new_question]);
         set_column([...column, new_id]);
+        dispatch({id: new_id, type: 0, value: String(0), heading: "Your Question", description: "Optional Text"})
     };
     const addText = () => {
         let new_id = "id_" + Object.keys(questions).length.toString();
@@ -56,6 +65,7 @@ export default function Create() {
         let new_question = { id: new_id, content: element };
         set_questions([...questions, new_question]);
         set_column([...column, new_id]);
+        dispatch({id: new_id, type: 1, value: "", heading: "Your Question", description: "Optional Text"})
     };
     const addRadio = () => {
         let new_id = "id_" + Object.keys(questions).length.toString();
@@ -63,6 +73,7 @@ export default function Create() {
         let new_question = { id: new_id, content: element };
         set_questions([...questions, new_question]);
         set_column([...column, new_id]);
+        dispatch({id: new_id, type: 2, value: Array.from([]), heading: "Your Question", description: "Optional Text"})
     };
 
     const submit = () => {
@@ -110,6 +121,28 @@ export default function Create() {
             }
         });
         console.log(response);
+        response.then(v => {
+            alert("Your poll has the id: " + v.data.pollID);
+        })
+        navigate("/");
+    };
+
+    const logout = async () => {
+        try {
+            await fetch("https://" + endpoint + "/logout", {
+                method: "post",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "*/*",
+                },
+                credentials: "include",
+            });
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+        setCookie("isLoggedIn", false, 1);
+        navigate("/");
     };
 
     const goBack = () => {
@@ -171,7 +204,7 @@ export default function Create() {
             <div style={{"height": "100%", "flex": "0.5 1"}}>
                 <div style={{"padding": "20px", "display": "flex", "justifyContent": "end"}}>
                     <div style={{"cursor": "pointer", "display": "flex", "alignItems": "center"}}>
-                        <span style={{"marginRight": "3px", "fontWeight": "bold", "color": "rgb(104, 111, 119)"}}>Logout</span>
+                        <span style={{"marginRight": "3px", "fontWeight": "bold", "color": "rgb(104, 111, 119)"}} onClick={logout}>Logout</span>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} style={{"width": "30px", "height": "20px", "color": "#686f77"}} />
                     </div>
                 </div>

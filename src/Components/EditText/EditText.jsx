@@ -14,8 +14,8 @@ export default function EditText({id, dispatch}) {
 
     return (
         <div id="edittext" className="editable">
-            <h2 ref={headingRef} onInput={onChange} contentEditable>Heading</h2>
-            <p ref={descriptionRef} onInput={onChange} contentEditable>maybe optional second text</p>
+            <h2 ref={headingRef} onInput={onChange} contentEditable>Your Question</h2>
+            <p ref={descriptionRef} onInput={onChange} contentEditable>Optional Text</p>
             <textarea onChange={onChange} ref={textareaRef}></textarea>
         </div>
     );

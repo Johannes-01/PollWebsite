@@ -44,8 +44,8 @@ export default function EditRadio({id, dispatch}) {
 
     return (
         <div id="radio" className={"editable"} ref={radioRef}>
-            <h2 ref={headingRef} onInput={() => {onChange(options);}} contentEditable>Heading</h2>
-            <p ref={descriptionRef} onInput={() => {onChange(options);}} contentEditable>maybe optional second text</p>
+            <h2 ref={headingRef} onInput={() => {onChange(options);}} contentEditable>Your Question</h2>
+            <p ref={descriptionRef} onInput={() => {onChange(options);}} contentEditable>Optional Text</p>
             <DragDropContext onDragEnd={(result) => {
                 const { destination, source, draggableId } = result;
                 if (!destination) return;

@@ -3,7 +3,7 @@ import React from "react";
 import "./Radio.css"
 import Option from "./Option";
 
-export default function Radio({options, id, dispatch}) {
+export default function Radio({options, id, dispatch, heading, description}) {
     let current_selected = null;
     const select = (obj) => {
         if (obj === null) return;
@@ -22,8 +22,8 @@ export default function Radio({options, id, dispatch}) {
 
     return (
         <div id="radio">
-            <h2>Heading</h2>
-            <p>maybe optional second text</p>
+            <h2>{heading}</h2>
+            <p>{description}</p>
             <div id="options-wrapper">
                 {option_list}
             </div>

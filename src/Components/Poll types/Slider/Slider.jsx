@@ -2,7 +2,7 @@ import React from "react";
 import "./Slider.css"
 import { useRef } from "react";
 
-export default function Slider({id, dispatch}) {
+export default function Slider({id, dispatch, heading, description}) {
     const sliderRef = useRef();
 
     let value = 0;
@@ -31,8 +31,8 @@ export default function Slider({id, dispatch}) {
 
     return (
         <div id="slider" ref={sliderRef}>
-            <h2>Heading</h2>
-            <p>maybe optional second text</p>
+            <h2>{heading}</h2>
+            <p>{description}</p>
             <div id="slider-wrapper">
                 <div id="bar">
                     <div id="bar-inner"></div>
