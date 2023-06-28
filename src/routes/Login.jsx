@@ -55,9 +55,8 @@ export default function Login() {
         // fade in for the choice ui components
         let dialogue_choice = document.getElementById("dialogue-choice");
         dialogue_choice.style.display = "flex";
-        /*         dialogue_choice.classList.add("fadein");
-                let dialogue_browse = document.getElementById("dialouge-browse");
-                dialogue_browse.classList.add("fadein"); */
+        let dialogue_browse = document.getElementById("dialouge-browse");
+        dialogue_browse.style.display = "flex";
     };
 
     const login = async (e) => {
@@ -152,8 +151,8 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            <div style={{ "position": "absolute", "bottom": "10px" }}>
-                <span style={{ "color": "#8e8e8e", "textDecorationLine": "underline", "cursor": "pointer" }} onClick={browsePolls}>Browse polls</span>
+            <div id ="dialouge-browse">
+                <span onClick={browsePolls}>Browse polls</span>
             </div>
         </div>
     );
