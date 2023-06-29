@@ -57,7 +57,7 @@ export default function Create() {
         let new_question = { id: new_id, content: element };
         set_questions([...questions, new_question]);
         set_column([...column, new_id]);
-        dispatch({id: new_id, type: 0, value: String(0), heading: "Your Question", description: "Optional Text"})
+        dispatch({id: new_id, type: 0, value: [String(0)], heading: "Your Question", description: "Optional Text"})
     };
     const addText = () => {
         let new_id = "id_" + Object.keys(questions).length.toString();
@@ -65,7 +65,7 @@ export default function Create() {
         let new_question = { id: new_id, content: element };
         set_questions([...questions, new_question]);
         set_column([...column, new_id]);
-        dispatch({id: new_id, type: 1, value: "", heading: "Your Question", description: "Optional Text"})
+        dispatch({id: new_id, type: 1, value: [""], heading: "Your Question", description: "Optional Text"})
     };
     const addRadio = () => {
         let new_id = "id_" + Object.keys(questions).length.toString();
@@ -101,12 +101,13 @@ export default function Create() {
         };
         form["questions"] = orderedQuestions.map((v, i) => {
             console.log(v);
+            let value = v[1];
             return {
                 "index": i,
                 "type": v[0],
                 "heading": v[2],
                 "description": v[3],
-                "value": v[1],
+                "value": value,
             }
         });
         console.log(JSON.stringify(form, null, 2));

@@ -21,7 +21,7 @@ export default function EditSlider({id, dispatch}) {
         let text = slider.querySelector("#slider-wrapper p");
         text.innerHTML = Math.round(value/slider_width*100) + "%";
 
-        dispatch({id: id, type: 0, value: Math.round(value/slider_width*100).toString(), heading: headingRef.current.innerText, description: descriptionRef.current.innerText});
+        dispatch({id: id, type: 0, value: [Math.round(value/slider_width*100).toString()], heading: headingRef.current.innerText, description: descriptionRef.current.innerText});
     };
 
     const grab = () => {

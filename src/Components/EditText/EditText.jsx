@@ -9,7 +9,7 @@ export default function EditText({id, dispatch}) {
     const textareaRef = useRef();
 
     const onChange = () => {
-        dispatch({id: id, type: 1, value: textareaRef.current.value, heading: headingRef.current.innerText, description: descriptionRef.current.innerText});
+        dispatch({id: id, type: 1, value: [textareaRef.current.value], heading: headingRef.current.innerText, description: descriptionRef.current.innerText});
     };
 
     return (
