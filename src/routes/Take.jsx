@@ -147,7 +147,7 @@ export default function Take() {
             let answeredQuestion = questionData[i];
             console.log(answeredQuestion);
             try {
-                await fetch("https://" + endpoint + "/question/" + v.questionID + "/takequestion", {
+                await fetch("https://" + endpoint + "/question/" + v.id + "/takequestion", {
                     method: "post",
                     headers: {
                         "content-type": "application/json",
