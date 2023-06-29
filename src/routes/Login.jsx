@@ -1,20 +1,17 @@
-import { json, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "../Components/components";
 import "../style/login.css"
 import PasswordField from "../Components/Input/PasswordField";
-import axios, { HttpStatusCode } from "axios";
 import { useState } from "react";
-import { createRef } from "react";
-import { useRef } from "react";
 import { isLoggedIn } from "..";
 import React from "react";
 
-export function setCookie(cname,cvalue,exdays) {
+export function setCookie(cname, cvalue, exdays) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
+}
 
 export default function Login() {
     const navigate = useNavigate();
@@ -72,7 +69,8 @@ export default function Login() {
         // fade in for the choice ui components
         let dialogue_choice = document.getElementById("dialogue-choice");
         dialogue_choice.style.display = "flex";
-        dialogue_choice.classList.add("fadein");
+        let dialogue_browse = document.getElementById("dialouge-browse");
+        dialogue_browse.style.display = "flex";
     };
 
     const login = async (e) => {
@@ -147,14 +145,14 @@ export default function Login() {
             <div id="dialogue">
                 <div id="dialogue-padding">
                     <div id="dialogue-login">
-                        <h2 style={{"marginBottom": "40px"}}>Login</h2>
+                        <h2 style={{ "marginBottom": "40px" }}>Login</h2>
                         <div id="middle">
                             <TextField title={"Username"} onInputChange={handleUsernameChange} style={username_input_style} tabIndex={"1"}></TextField>
                             <PasswordField title={"Password"} onInputChange={handlePasswordChange} style={password_input_style} tabIndex={"2"}></PasswordField>
                         </div>
-                        <Button text={"login"} onclick={login} loading={loginLoading} style={{"marginTop": "60px"}} tabIndex={"3"}></Button>
-                        <div style={{"color": "var(--white)", "textDecorationLine": "underline", "cursor": "pointer", "marginTop": "3px", "fontSize": "13px"}}
-                        onClick={signUp} tabIndex={"4"}>
+                        <Button text={"login"} onclick={login} loading={loginLoading} style={{ "marginTop": "60px" }} tabIndex={"3"}></Button>
+                        <div style={{ "color": "var(--white)", "textDecorationLine": "underline", "cursor": "pointer", "marginTop": "3px", "fontSize": "13px" }}
+                            onClick={signUp} tabIndex={"4"}>
                             <a>Sign up</a>
                         </div>
                         <p style={info_msg_style}>Wrong username or password</p>
@@ -165,8 +163,8 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            <div style={{"position": "absolute", "bottom": "10px"}}>
-                <span style={{"color": "#8e8e8e", "textDecorationLine": "underline", "cursor": "pointer"}} onClick={browsePolls}>Browse polls</span>
+            <div id ="dialouge-browse">
+                <span onClick={browsePolls}>Browse polls</span>
             </div>
         </div>
     );

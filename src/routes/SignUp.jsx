@@ -1,15 +1,13 @@
-import { json, Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button, TextField } from "../Components/components";
 import "../style/signup.css"
 import PasswordField from "../Components/Input/PasswordField";
-import axios, { HttpStatusCode } from "axios";
 import { useState } from "react";
-import { createRef } from "react";
-import { useRef } from "react";
 
 export default function SignUp() {
-    const endpoint = "185.84.80.172:7085"
+
     const navigate = useNavigate();
+    const endpoint = "185.84.80.172:7085"
 
     const [nameValue, setNameValue] = useState("");
     const [surnameValue, setSurnameValue] = useState("");
@@ -34,23 +32,26 @@ export default function SignUp() {
             "password": passwordValue,
         };
         console.log(form);
-        let response = null
-        try{
-        response = await fetch("https://" + endpoint + "/users", {
-            method: "post",
-            headers: {
-                "content-type": "application/json",
-                "accept": "*/*",
-            },
-            body: JSON.stringify(form),
-            credentials: "include",
-        });
-    }catch (error) {
-        console.log(error)
-        return;
-    }
-        console.log(response);
-        navigate("/");
+        if(usernameValue !== null && passwordValue !== null){
+
+            let response = await fetch("https://" + endpoint + "/users", {
+                method: "post",
+                headers: {
+                    "content-type": "application/json",
+                    "accept": "*/*",
+                },
+                body: JSON.stringify(form),
+                credentials: "include",
+            });
+                
+            if (response !== null && response.status === 201) {
+                navigate("/");
+            } else if (response !== null && response.status === 403){
+                //to do: username already taken animation
+                console.log("Username already taken.")
+            }
+            console.log(response)
+          }
     };
 
     return (

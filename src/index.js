@@ -52,7 +52,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='/createpoll' element={<ProtectedRoute><Create /></ProtectedRoute>} />
         <Route path='/penis' element={<App />} />
         <Route path='/signup' element={<SignUp />} />
-        <Route path='/browse' element={<Browse />} />
+        <Route path='/browse' element={<ProtectedRoute><Browse /></ProtectedRoute>} />
       </Route>
     </Routes>
   </BrowserRouter>

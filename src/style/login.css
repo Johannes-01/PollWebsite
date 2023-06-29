@@ -19,7 +19,7 @@ p {
 
 #dialogue {
     position: relative;
-	background: var(--grey2);
+    background: var(--grey2);
     border: 1px solid var(--grey1);
 	width: min-content;
 	border-radius: 10px;
@@ -53,6 +53,19 @@ p {
     display: none;
 }
 
+#dialouge-browse {
+    position: absolute;
+    bottom: 10px;
+    display: none;
+}
+
+#dialouge-browse span {
+    color: #8e8e8e;
+    text-decoration-line: underline;
+    cursor: pointer;
+}
+ 
+
 #dialogue-padding {
     position: relative;
     height: 100%;
@@ -60,12 +73,12 @@ p {
 }
 
 #middle {
-	flex: 1;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .error {
@@ -78,9 +91,15 @@ p {
 */
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
+
 #loader {
     border: 4px solid var(--grey1);
     border-top: 4px solid var(--accent);
