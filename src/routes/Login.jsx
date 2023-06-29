@@ -127,9 +127,12 @@ export default function Login() {
     };
     
     const takepoll = () => {
-        let pollId = window.prompt("enter poll id");
-        if (pollId === null) return;
-        navigate("/takepoll", {state: {pollId: pollId}});
+        let pollId = null;
+        pollId = window.prompt("enter poll id");
+        if(pollId == null || pollId == ""){
+            return;
+        }
+        navigate("/takepoll", { state: { pollId: pollId } });
     };
 
     const createpoll = () => {
