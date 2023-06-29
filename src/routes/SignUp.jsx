@@ -48,10 +48,15 @@ export default function SignUp() {
                 navigate("/");
             } else if (response !== null && response.status === 403){
                 //to do: username already taken animation
-                console.log("Username already taken.")
+                window.alert("Username already taken.");
+                console.log("Username already taken.");
             }
             console.log(response)
           }
+    };
+
+    const login = () => {
+        navigate("/");
     };
 
     return (
@@ -68,6 +73,10 @@ export default function SignUp() {
                         <PasswordField title={"Password"} onInputChange={handlePasswordChange}></PasswordField>
                     </div>
                     <Button text={"Sign Up"} onclick={signup}></Button>
+                    <div style={{ "color": "var(--white)", "textDecorationLine": "underline", "cursor": "pointer", "marginTop": "3px", "fontSize": "13px" }}
+                            onClick={login}>
+                            <a>Login</a>
+                        </div>
                     <p style={{"display": "none"}}>Wrong username or password</p>
                 </div>
             </div>
