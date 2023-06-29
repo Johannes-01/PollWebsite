@@ -104,7 +104,7 @@ export default function Take() {
                         let resp = null;
                         try {
                             resp = await fetch("https://" + endpoint + "/question/" + question.questionID + "/questionOptions", {
-                                method: "post",
+                                method: "get",
                                 headers: {
                                     "content-type": "application/json",
                                     "accept": "*/*",
@@ -118,7 +118,14 @@ export default function Take() {
 
                         // now that we have the options, we can add the question
                         resp.json().then(v => {
-                            console.log(v);
+                            let options = v.map(option => option.value)
+                            setQuestions(oldQuestions => [...oldQuestions, {
+                                heading: question.heading,
+                                description: question.description,
+                                id: question.questionID,
+                                type: question.questionType,
+                                options: options,
+                            }])
                         })
                         break;
                     default:
@@ -209,7 +216,7 @@ export default function Take() {
                             case 1:
                                 return <Text id={index} dispatch={dispatch} heading={question.heading} description={question.description} />;
                             case 2:
-                                return <Radio id={index} dispatch={dispatch} options={["placeholder"]} heading={question.heading} description={question.description} />;
+                                return <Radio id={index} dispatch={dispatch} options={question.options} heading={question.heading} description={question.description} />;
                             default:
                                 return <p>sth went wrong</p>;
                         }

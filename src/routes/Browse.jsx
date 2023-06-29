@@ -8,12 +8,9 @@ import { faArrowLeft, faArrowRightFromBracket } from "@fortawesome/free-solid-sv
 import { useEffect } from "react";
 import { setCookie } from "./Login";
 
-function Poll({title, description, username, pollId, navigate}) {
-    const takePoll = () => {
-        navigate("/takepoll", {state: {pollId: pollId}})
-    };
+export function Poll({title, description, username, pollId, navigate, onClick=null}) {
     return (
-        <div onClick={takePoll} style={{
+        <div onClick={onClick} style={{
             "display": "flex",
             "flexDirection": "column",
             "padding": "3px",
@@ -21,7 +18,8 @@ function Poll({title, description, username, pollId, navigate}) {
             "border": "1px solid var(--grey4)",
             "background": "#333639",
             "borderRadius": "3px",
-            "boxSizing": "border-box"
+            "boxSizing": "border-box",
+            "cursor": "pointer",
         }}>
             <div style={{"display": "flex", "justifyContent": "space-between"}}>
                 <div>{title}</div>
@@ -96,7 +94,10 @@ export default function Browse() {
                     return;
                 }
                 resp.json().then(v => {
-                    setPolls(oldPolls => [...oldPolls, <Poll title={element.title} description={element.description} username={v.userName} pollId={element.pollID} navigate={navigate}></Poll>])
+                    const takePoll = () => {
+                        navigate("/takepoll", {state: {pollId: element.pollID}})
+                    };
+                    setPolls(oldPolls => [...oldPolls, <Poll title={element.title} description={element.description} username={v.userName} pollId={element.pollID} navigate={navigate} onClick={takePoll}></Poll>])
                 })
             }
         });
@@ -119,7 +120,7 @@ export default function Browse() {
             </div>
             <div id="poll-wrapper">
                 <div id="backbutton"></div>
-                <div id="poll-inner">
+                <div id="poll-inner" style={{"marginTop": "30px"}}>
                     {polls}
                 </div>
             </div>

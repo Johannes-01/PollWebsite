@@ -47,6 +47,8 @@ export default function Login() {
 
             let dialogue_choice = document.getElementById("dialogue-choice");
             dialogue_choice.style.display = "flex";
+            let dialogue_browse = document.getElementById("dialouge-browse");
+            dialogue_browse.style.display = "flex";
 
             let dialogue = document.getElementById("dialogue");
             dialogue.style.height = "fit-content"; // padding: 45px 30px;
@@ -125,6 +127,10 @@ export default function Login() {
     const browsePolls = () => {
         navigate("/browse");
     };
+
+    const viewPolls = () => {
+        navigate("/view");
+    }
     
     const takepoll = () => {
         let pollId = window.prompt("enter poll id");
@@ -164,7 +170,7 @@ export default function Login() {
                 </div>
             </div>
             <div id ="dialouge-browse">
-                <span onClick={browsePolls}>Browse polls</span>
+                <span className="routesText" onClick={browsePolls}>Browse polls</span><span style={{"margin": "0 4px", "textDecorationLine": "none!important", "cursor": "default"}}> / </span><span className="routesText" onClick={viewPolls}>View my Polls</span>
             </div>
         </div>
     );

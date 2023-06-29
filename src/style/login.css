@@ -61,6 +61,9 @@ p {
 
 #dialouge-browse span {
     color: #8e8e8e;
+}
+
+#dialouge-browse .routesText {
     text-decoration-line: underline;
     cursor: pointer;
 }

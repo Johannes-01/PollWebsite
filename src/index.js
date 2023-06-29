@@ -10,6 +10,7 @@ import Take from './routes/Take';
 import Create from './routes/Create';
 import SignUp from './routes/SignUp';
 import Browse from './routes/Browse';
+import View from './routes/View';
 
 function getCookie(cname) {
   let name = cname + "=";
@@ -53,6 +54,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path='/penis' element={<App />} />
         <Route path='/signup' element={<SignUp />} />
         <Route path='/browse' element={<ProtectedRoute><Browse /></ProtectedRoute>} />
+        <Route path='/view' element={<ProtectedRoute><View /></ProtectedRoute>} />
+        <Route path='/view/:id' element={<ProtectedRoute><View /></ProtectedRoute>} />
       </Route>
     </Routes>
   </BrowserRouter>
