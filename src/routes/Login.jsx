@@ -14,6 +14,8 @@ export function setCookie(cname, cvalue, exdays) {
 }
 
 export default function Login() {
+    document.title = "Poll-Website";
+
     const navigate = useNavigate();
     const endpoint = "185.84.80.172:7085"
 
