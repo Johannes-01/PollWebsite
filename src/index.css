@@ -34,8 +34,8 @@ code {
 }
 
 @keyframes fadeout {
-  0% {opacity: 1.0;}
-  100% {opacity: 0.0;}
+  0% {opacity: 1.0; /*height: 400px;*/}
+  100% {opacity: 0.0; /*height: 0px;*/}
 }
 @keyframes fadein {
   0% {
@@ -54,8 +54,8 @@ code {
 }
 
 @keyframes reshape-dialogue {
-  0% {width: 350px; height: 400px;}
-  100% {width: 450px; height: 30px;}
+  0% {width: 350px;/* height: 400px;*/}
+  100% {width: 450px;/* height: 30px;*/}
 }
 .reshape-dialogue-class {
   animation: reshape-dialogue 0.5s linear 0s 1 forwards;

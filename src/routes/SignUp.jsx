@@ -1,4 +1,4 @@
-import { json, useNavigate } from "react-router-dom";
+import { json, Navigate, useNavigate } from "react-router-dom";
 import { Button, TextField } from "../Components/components";
 import "../style/signup.css"
 import PasswordField from "../Components/Input/PasswordField";
@@ -9,6 +9,7 @@ import { useRef } from "react";
 
 export default function SignUp() {
     const endpoint = "185.84.80.172:7085"
+    const navigate = useNavigate();
 
     const [nameValue, setNameValue] = useState("");
     const [surnameValue, setSurnameValue] = useState("");
@@ -33,7 +34,9 @@ export default function SignUp() {
             "password": passwordValue,
         };
         console.log(form);
-        let response = await fetch("https://" + endpoint + "/users", {
+        let response = null
+        try{
+        response = await fetch("https://" + endpoint + "/users", {
             method: "post",
             headers: {
                 "content-type": "application/json",
@@ -42,7 +45,12 @@ export default function SignUp() {
             body: JSON.stringify(form),
             credentials: "include",
         });
-        console.log(response)
+    }catch (error) {
+        console.log(error)
+        return;
+    }
+        console.log(response);
+        navigate("/");
     };
 
     return (

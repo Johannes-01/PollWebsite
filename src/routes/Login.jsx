@@ -42,7 +42,18 @@ export default function Login() {
 
     React.useEffect(() => {
         if (isLoggedIn()) {
-            loginAnimation();
+            //loginAnimation();
+            let dialogue_login = document.getElementById("dialogue-login");
+            dialogue_login.style.transition = "all 0s";
+            dialogue_login.style.height = "0px";
+            dialogue_login.style.opacity = "0";
+
+            let dialogue_choice = document.getElementById("dialogue-choice");
+            dialogue_choice.style.display = "flex";
+
+            let dialogue = document.getElementById("dialogue");
+            dialogue.style.height = "fit-content"; // padding: 45px 30px;
+            dialogue.style.width = "450px";
         }
     }, []);
 
@@ -53,7 +64,10 @@ export default function Login() {
 
         // fade out for the login ui components
         let dialogue_login = document.getElementById("dialogue-login");
-        dialogue_login.classList.add("fadeout");
+        //dialogue_login.classList.add("fadeout");
+        //dialogue_login.classList.add("heightzero");
+        dialogue_login.style.height = "0px";
+        dialogue_login.style.opacity = "0";
 
         // fade in for the choice ui components
         let dialogue_choice = document.getElementById("dialogue-choice");
@@ -113,12 +127,10 @@ export default function Login() {
     const browsePolls = () => {
         navigate("/browse");
     };
-
+    
     const takepoll = () => {
-        let pollId = null;
-        while (pollId === null || pollId === "") {
-            pollId = window.prompt("enter poll id");
-        }
+        let pollId = window.prompt("enter poll id");
+        if (pollId === null) return;
         navigate("/takepoll", {state: {pollId: pollId}});
     };
 
