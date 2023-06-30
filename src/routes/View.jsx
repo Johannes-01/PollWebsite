@@ -62,7 +62,7 @@ export default function View() {
             console.error(error);
             return;
         }
-        setCookie("isLoggedIn", false, 1);
+        setCookie("isLoggedIn", false, 30);
         navigate("/");
     };
     

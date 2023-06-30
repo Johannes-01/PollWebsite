@@ -79,24 +79,29 @@ export default function Take() {
         resp.json().then(async v => {
             for (let i = 0; i < v.length; i++) {
                 let question = v[i];
+                let oldQuestions = null;
                 switch (question.questionType) {
                     case 0:
                         // slider
-                        setQuestions(oldQuestions => [...oldQuestions, {
+                        oldQuestions = questions;
+                        oldQuestions.splice(question.index, 0, {
                             heading: question.heading,
                             description: question.description,
                             id: question.questionID,
                             type: question.questionType,
-                        }])
+                        })
+                        setQuestions(Array.from(oldQuestions))
                         break;
                     case 1:
                         // Text
-                        setQuestions(oldQuestions => [...oldQuestions, {
+                        oldQuestions = questions;
+                        oldQuestions.splice(question.index, 0, {
                             heading: question.heading,
                             description: question.description,
                             id: question.questionID,
                             type: question.questionType,
-                        }])
+                        })
+                        setQuestions(Array.from(oldQuestions))
                         break;
                     case 2:
                         // radio
@@ -117,16 +122,17 @@ export default function Take() {
                         }
 
                         // now that we have the options, we can add the question
-                        resp.json().then(v => {
-                            let options = v.map(option => option.value)
-                            setQuestions(oldQuestions => [...oldQuestions, {
-                                heading: question.heading,
-                                description: question.description,
-                                id: question.questionID,
-                                type: question.questionType,
-                                options: options,
-                            }])
+                        resp = await resp.json()
+                        let options = resp.map(option => option.value)
+                        oldQuestions = questions;
+                        oldQuestions.splice(question.index, 0, {
+                            heading: question.heading,
+                            description: question.description,
+                            id: question.questionID,
+                            type: question.questionType,
+                            options: options,
                         })
+                        setQuestions(Array.from(oldQuestions))
                         break;
                     default:
                         break;
@@ -185,7 +191,7 @@ export default function Take() {
             console.error(error);
             return;
         }
-        setCookie("isLoggedIn", false, 1);
+        setCookie("isLoggedIn", false, 30);
         navigate("/");
     };
 

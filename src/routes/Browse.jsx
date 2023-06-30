@@ -55,7 +55,7 @@ export default function Browse() {
             console.error(error);
             return;
         }
-        setCookie("isLoggedIn", false, 1);
+        setCookie("isLoggedIn", false, 30);
         navigate("/");
     };
     
@@ -94,6 +94,7 @@ export default function Browse() {
                     return;
                 }
                 resp.json().then(v => {
+                    console.log(v)
                     const takePoll = () => {
                         navigate("/takepoll", {state: {pollId: element.pollID}})
                     };

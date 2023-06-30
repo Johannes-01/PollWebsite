@@ -6,9 +6,10 @@ import { useState } from "react";
 import { isLoggedIn } from "..";
 import React from "react";
 
-export function setCookie(cname, cvalue, exdays) {
+export function setCookie(cname, cvalue, minutes) {
     const d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    //d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    d.setTime(d.getTime() + (minutes * 60 * 1000));
     let expires = "expires=" + d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
@@ -106,7 +107,7 @@ export default function Login() {
         console.log(response);
         console.log(response.headers['set-cookie'])
         if (response !== null && response.status === 200) {
-            setCookie("isLoggedIn", true, 1);
+            setCookie("isLoggedIn", true, 30);
             loginAnimation();
         } else {
             // erstmal beide input felder auf rot setzen
